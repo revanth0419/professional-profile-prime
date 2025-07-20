@@ -1,11 +1,11 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import FeaturedListings from '@/components/FeaturedListings';
 import About from '@/components/About';
-import Education from '@/components/Education';
-import Skills from '@/components/Skills';
-import Projects from '@/components/Projects';
-import Achievements from '@/components/Achievements';
+import Services from '@/components/Services';
+import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
+import CallToAction from '@/components/CallToAction';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -14,12 +14,12 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <FeaturedListings />
         <About />
-        <Education />
-        <Skills />
-        <Projects />
-        <Achievements />
+        <Services />
+        <Testimonials />
         <Contact />
+        <CallToAction />
       </main>
       <Footer />
     </div>

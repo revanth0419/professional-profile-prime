@@ -1,212 +1,173 @@
 import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
-    subject: '',
+    phone: '',
     message: ''
   });
-  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simulate form submission
     toast({
       title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon!",
+      description: "Thank you for your inquiry. We'll get back to you soon.",
     });
-    
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setFormData({ fullName: '', email: '', phone: '', message: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [e.target.name]: e.target.value
-    });
+    }));
   };
 
   const contactInfo = [
     {
-      icon: Mail,
-      title: "Email",
-      value: "your.email@example.com",
-      href: "mailto:your.email@example.com"
+      icon: MapPin,
+      title: 'Visit Our Office',
+      details: ['3rd Floor, NTR Circle Road', 'Benz Circle, Vijayawada', 'Andhra Pradesh - 520010']
     },
     {
       icon: Phone,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "Your City, Country",
-      href: "#"
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      name: "GitHub",
-      href: "https://github.com/yourusername",
-      color: "hover:text-gray-400"
-    },
-    {
-      icon: Linkedin,
-      name: "LinkedIn",
-      href: "https://linkedin.com/in/yourusername",
-      color: "hover:text-blue-500"
-    },
-    {
-      icon: Twitter,
-      name: "Twitter",
-      href: "https://twitter.com/yourusername",
-      color: "hover:text-blue-400"
+      title: 'Call Us',
+      details: ['+91 99876 54321']
     },
     {
       icon: Mail,
-      name: "Email",
-      href: "mailto:your.email@example.com",
-      color: "hover:text-red-500"
+      title: 'Email Us',
+      details: ['info@riverstonerealty.in']
+    },
+    {
+      icon: Clock,
+      title: 'Business Hours',
+      details: ['Mon - Sat: 9:00 AM - 7:00 PM', 'Sunday: 10:00 AM - 5:00 PM']
     }
   ];
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-20 bg-background">
       <div className="section-container">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            I'm always open to discussing new opportunities, collaborations, or just having a chat about technology
+          <p className="text-xl text-muted-foreground">
+            Ready to find your dream property? Let's start the conversation.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Information */}
-          <div className="space-y-8 animate-slide-in-left">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Let's Connect</h3>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Whether you have a project in mind, want to discuss opportunities, or just want to say hello, 
-                I'd love to hear from you. Feel free to reach out through any of the channels below.
-              </p>
-            </div>
-
-            {/* Contact Details */}
-            <div className="space-y-4">
+          <div>
+            <h3 className="text-2xl font-semibold text-foreground mb-8">
+              Contact Information
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6 mb-8">
               {contactInfo.map((info, index) => (
-                <Card 
-                  key={index} 
-                  className="card-hover bg-card/50 backdrop-blur-sm border-border/50"
-                >
-                  <CardContent className="p-4">
-                    <a 
-                      href={info.href} 
-                      className="flex items-center space-x-4 text-left"
-                    >
-                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
-                        <info.icon className="h-6 w-6 text-primary-foreground" />
+                <Card key={index} className="card-hover">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                        <info.icon className="w-6 h-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h4 className="font-medium">{info.title}</h4>
-                        <p className="text-muted-foreground">{info.value}</p>
+                        <h4 className="text-lg font-semibold text-foreground mb-2">
+                          {info.title}
+                        </h4>
+                        {info.details.map((detail, detailIndex) => (
+                          <p key={detailIndex} className="text-muted-foreground">
+                            {detail}
+                          </p>
+                        ))}
                       </div>
-                    </a>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
-            {/* Social Links */}
-            <div>
-              <h4 className="font-semibold mb-4">Follow me on social media</h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-secondary/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-secondary/80 ${social.color}`}
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
+            {/* Map */}
+            <div className="rounded-lg overflow-hidden shadow-card h-64">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.6927071534676!2d80.6469!3d16.5062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35eff4a4b6e225%3A0x69772e8c4c9e6a2e!2sBenz%20Circle%2C%20Vijayawada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1635789456789!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="RiverStone Realty Location"
+              />
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="animate-slide-in-right">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+          <div>
+            <Card className="card-hover">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+                <h3 className="text-2xl font-semibold text-foreground mb-6">
+                  Send Us a Message
+                </h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Name *
+                      <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-2">
+                        Full Name *
                       </label>
                       <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
                         onChange={handleChange}
-                        placeholder="Your full name"
                         required
-                        className="bg-background/50"
+                        placeholder="Enter your full name"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
-                        Email *
+                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                        Phone *
                       </label>
                       <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
                         onChange={handleChange}
-                        placeholder="your.email@example.com"
                         required
-                        className="bg-background/50"
+                        placeholder="Enter your phone number"
                       />
                     </div>
                   </div>
-
+                  
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Subject *
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Email *
                     </label>
                     <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
                       onChange={handleChange}
-                      placeholder="What's this about?"
                       required
-                      className="bg-background/50"
+                      placeholder="Enter your email address"
                     />
                   </div>
-
+                  
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Message *
                     </label>
                     <Textarea
@@ -214,20 +175,14 @@ const Contact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell me more about your project or inquiry..."
-                      rows={6}
                       required
-                      className="bg-background/50 resize-none"
+                      placeholder="Tell us about your property requirements..."
+                      className="min-h-[120px]"
                     />
                   </div>
-
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
-                    size="lg"
-                  >
-                    <Send className="mr-2 h-5 w-5" />
-                    Send Message
+                  
+                  <Button type="submit" size="lg" className="w-full">
+                    Book a Free Property Tour
                   </Button>
                 </form>
               </CardContent>

@@ -1,70 +1,108 @@
-import { Heart, ArrowUp } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const quickLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'Listings', href: '#listings' },
+    { label: 'About', href: '#about' },
+    { label: 'Services', href: '#services' },
+    { label: 'Contact', href: '#contact' },
+    { label: 'Terms', href: '#terms' }
+  ];
 
-  const currentYear = new Date().getFullYear();
+  const socialLinks = [
+    { icon: Facebook, href: '#', label: 'Facebook' },
+    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn' }
+  ];
 
   return (
-    <footer className="bg-card/30 backdrop-blur-sm border-t border-border">
-      <div className="section-container py-12">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          
-          {/* Left Section */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold gradient-text">Your Name</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Final-year engineering student passionate about technology, 
-              innovation, and creating solutions that make a difference.
+    <footer className="bg-secondary border-t border-border">
+      <div className="section-container py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm">RS</span>
+              </div>
+              <span className="text-xl font-semibold text-foreground">RiverStone Realty</span>
+            </div>
+            
+            <p className="text-muted-foreground mb-6 max-w-md">
+              Building Homes & Trust. Your trusted partner in Vijayawada real estate 
+              with over a decade of experience in premium property solutions.
             </p>
-          </div>
-
-          {/* Middle Section */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">Quick Links</h4>
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a>
-              <a href="#education" className="text-muted-foreground hover:text-primary transition-colors">Education</a>
-              <a href="#skills" className="text-muted-foreground hover:text-primary transition-colors">Skills</a>
-              <a href="#projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</a>
-              <a href="#achievements" className="text-muted-foreground hover:text-primary transition-colors">Achievements</a>
-              <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
+            
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
+                <span>3rd Floor, NTR Circle Road, Benz Circle, Vijayawada - 520010</span>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
+                <span>+91 99876 54321</span>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                <span>info@riverstonerealty.in</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Section */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">Currently</h4>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <p>🎓 Completing final year of Engineering</p>
-              <p>💼 Open to internship opportunities</p>
-              <p>🚀 Building innovative projects</p>
-              <p>📚 Continuous learning and growth</p>
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-6">Quick Links</h3>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social & Contact */}
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-6">Connect With Us</h3>
+            
+            <div className="flex gap-4 mb-6">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+            
+            <div className="text-sm text-muted-foreground">
+              <p className="mb-2">Business Hours:</p>
+              <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
+              <p>Sunday: 10:00 AM - 5:00 PM</p>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-border pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-1 text-sm text-muted-foreground">
-              <span>© {currentYear} Made with</span>
-              <Heart className="h-4 w-4 text-red-500 fill-current" />
-              <span>by Your Name</span>
+      {/* Bottom Bar */}
+      <div className="border-t border-border">
+        <div className="section-container py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-muted-foreground text-sm mb-4 md:mb-0">
+              © 2024 RiverStone Realty. All rights reserved.
             </div>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={scrollToTop}
-              className="hover:bg-secondary/50 rounded-full"
-            >
-              <ArrowUp className="h-4 w-4 mr-2" />
-              Back to Top
-            </Button>
+            <div className="text-primary font-medium text-sm">
+              RiverStone Realty — Building Homes & Trust
+            </div>
           </div>
         </div>
       </div>
