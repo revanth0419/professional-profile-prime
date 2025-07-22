@@ -21,25 +21,25 @@ const About = () => {
             
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
-                RiverStone Realty is a trusted name in the Vijayawada real estate market, 
-                offering personalized property solutions for over a decade.
+                We are a passionate real estate agency committed to helping people find their 
+                dream homes in and around Vijayawada. With deep local knowledge and years of 
+                experience, we understand the unique character of each neighborhood.
               </p>
               
               <p>
-                Our team of local experts specializes in matching buyers and investors with 
-                the best real estate options in Benz Circle, Moghalrajpuram, Kanuru, and 
-                other key localities.
+                Our dedicated team specializes in residential and commercial properties across 
+                prime locations like Benz Circle, Moghalrajpuram, Auto Nagar, and Gannavaram. 
+                We pride ourselves on providing transparent, honest, and personalized service.
               </p>
               
               <p>
-                With a focus on transparency, market insight, and customer care, RiverStone 
-                Realty is your partner in navigating the fast-growing Vijayawada property 
-                landscape. Whether you're looking for your first home, an investment property, 
-                or a commercial space — we've got you covered.
+                Whether you're a first-time buyer, seasoned investor, or looking to sell your 
+                property, we're here to guide you through every step. Our mission is to make 
+                your real estate journey smooth, informed, and successful.
               </p>
               
               <p className="text-primary font-semibold text-xl">
-                Over 750+ happy customers and counting.
+                Building trust, one home at a time.
               </p>
             </div>
           </div>
