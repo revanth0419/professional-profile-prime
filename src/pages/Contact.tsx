@@ -16,12 +16,12 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone Number',
-      details: ['+91 99876 54321', '+91 88765 43210']
+      details: ['+91-98765-43210', 'Available 24/7']
     },
     {
       icon: Mail,
       title: 'Email Address',
-      details: ['info@riverstonerealty.in', 'support@riverstonerealty.in']
+      details: ['info@yourcompany.com', 'Quick response guaranteed']
     },
     {
       icon: Clock,

@@ -1,11 +1,25 @@
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Bed, Bath, Square, Eye, Filter } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { MapPin, Bed, Bath, Square, Eye, Filter, Search } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const Listings = () => {
+  const [searchParams] = useSearchParams();
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  useEffect(() => {
+    const typeParam = searchParams.get('type');
+    if (typeParam) {
+      setActiveFilter(typeParam);
+    }
+  }, [searchParams]);
+
   const listings = [
     {
       id: 1,
@@ -118,6 +132,24 @@ const Listings = () => {
     }
   ];
 
+  const filterTypes = [
+    { id: 'all', label: 'All Properties', icon: Filter },
+    { id: 'apartment', label: 'Apartments', icon: null },
+    { id: 'villa', label: 'Villas', icon: null },
+    { id: 'commercial', label: 'Commercial', icon: null },
+    { id: 'plot', label: 'Plots', icon: null },
+  ];
+
+  const filteredListings = listings.filter(listing => {
+    const matchesFilter = activeFilter === 'all' || listing.type.toLowerCase() === activeFilter.toLowerCase();
+    const matchesSearch = searchTerm === '' || 
+      listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      listing.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      listing.description.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    return matchesFilter && matchesSearch;
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -133,24 +165,41 @@ const Listings = () => {
               </p>
             </div>
 
-            {/* Filter Section */}
-            <div className="mb-12">
+            {/* Search and Filter Section */}
+            <div className="mb-12 space-y-6">
+              {/* Search Bar */}
+              <Card className="p-6">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    placeholder="Search by location, property type, or keywords..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </Card>
+
+              {/* Filter Tabs */}
               <Card className="p-6">
                 <div className="flex flex-wrap gap-4 items-center">
-                  <Button variant="outline" className="gap-2">
-                    <Filter className="w-4 h-4" />
-                    All Properties
-                  </Button>
-                  <Button variant="outline">Apartments</Button>
-                  <Button variant="outline">Villas</Button>
-                  <Button variant="outline">Commercial</Button>
-                  <Button variant="outline">Plots</Button>
+                  {filterTypes.map((filter) => (
+                    <Button
+                      key={filter.id}
+                      variant={activeFilter === filter.id ? "default" : "outline"}
+                      className="gap-2"
+                      onClick={() => setActiveFilter(filter.id)}
+                    >
+                      {filter.icon && <filter.icon className="w-4 h-4" />}
+                      {filter.label}
+                    </Button>
+                  ))}
                 </div>
               </Card>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {listings.map((listing) => (
+              {filteredListings.map((listing) => (
                 <Card key={listing.id} className="group card-hover overflow-hidden">
                   <div className="relative">
                     <img 

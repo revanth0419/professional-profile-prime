@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import heroImage from '@/assets/hero-vijayawada.jpg';
 
 const Hero = () => {
@@ -23,22 +24,26 @@ const Hero = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Your Gateway to{' '}
-            <span className="gradient-text">Premium Properties</span>{' '}
+            Find Your Perfect{' '}
+            <span className="gradient-text">Property</span>{' '}
             in Vijayawada
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Apartments • Villas • Commercial • Plots
+            Explore luxury apartments, premium villas, secure plots, and thriving commercial spaces — all in one place.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="gap-2 px-8 py-6 text-lg">
-              Explore Listings
-              <ArrowRight className="w-5 h-5" />
+            <Button size="lg" className="gap-2 px-8 py-6 text-lg" asChild>
+              <Link to="/listings">
+                View Listings
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </Button>
-            <Button variant="outline" size="lg" className="px-8 py-6 text-lg">
-              Book a Free Property Tour
+            <Button variant="outline" size="lg" className="px-8 py-6 text-lg" asChild>
+              <Link to="/contact">
+                Get in Touch
+              </Link>
             </Button>
           </div>
           
