@@ -24,16 +24,15 @@ const Hero = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Find Your Perfect{' '}
-            <span className="gradient-text">Property</span>{' '}
-            in Vijayawada
+            Find Your Perfect Property in{' '}
+            <span className="gradient-text">Vijayawada</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Explore luxury apartments, premium villas, secure plots, and thriving commercial spaces — all in one place.
+            Apartments, Villas, Plots, and Commercial Spaces — All in One Place.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Button size="lg" className="gap-2 px-8 py-6 text-lg" asChild>
               <Link to="/listings">
                 View Listings
@@ -47,12 +46,24 @@ const Hero = () => {
             </Button>
           </div>
           
-          {/* Key Areas */}
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-            {['Benz Circle', 'Moghalrajpuram', 'Kanuru', 'Bhavanipuram'].map((area) => (
-              <div key={area} className="bg-secondary/50 backdrop-blur-sm rounded-lg p-3 border border-border">
-                <span className="text-sm font-medium text-foreground">{area}</span>
-              </div>
+          {/* Property Type Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {[
+              { type: 'Buildings', icon: '🏢', filter: 'villa' },
+              { type: 'Apartments', icon: '🏘️', filter: 'apartment' },
+              { type: 'Commercial Spaces', icon: '📈', filter: 'commercial' },
+              { type: 'Plots', icon: '🏞️', filter: 'plot' }
+            ].map((item) => (
+              <Link 
+                key={item.type} 
+                to={`/listings?type=${item.filter}`}
+                className="group bg-secondary/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-300 hover:bg-secondary/80 card-hover text-center"
+              >
+                <div className="text-4xl mb-3">{item.icon}</div>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {item.type}
+                </h3>
+              </Link>
             ))}
           </div>
         </div>

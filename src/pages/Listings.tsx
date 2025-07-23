@@ -7,11 +7,14 @@ import { MapPin, Bed, Bath, Square, Eye, Filter, Search } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PropertyDetailModal from '@/components/PropertyDetailModal';
 
 const Listings = () => {
   const [searchParams] = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   useEffect(() => {
     const typeParam = searchParams.get('type');
@@ -24,27 +27,29 @@ const Listings = () => {
     {
       id: 1,
       title: "3BHK Premium Apartment",
-      location: "Benz Circle",
+      location: "Benz Circle, Vijayawada",
       price: "₹85 Lakhs",
       bedrooms: 3,
       bathrooms: 2,
       area: "1,250 sq ft",
       type: "Apartment",
-      description: "Modern apartment with premium amenities and parking",
+      description: "Modern 3BHK apartment in Benz Circle with luxury amenities and excellent connectivity.",
       image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop",
-      featured: true
+      featured: true,
+      amenities: ["24/7 Security", "Power Backup", "Covered Parking", "Gym", "Children's Park"]
     },
     {
       id: 2,
-      title: "Luxury Villa with Garden",
+      title: "Luxury Villa",
       location: "Moghalrajpuram",
       price: "₹1.5 Crores",
       bedrooms: 4,
       bathrooms: 3,
       area: "2,800 sq ft",
       type: "Villa",
-      description: "Spacious villa with landscaped garden and car parking",
-      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop"
+      description: "Premium villa in Moghalrajpuram with landscaped garden, spacious interiors, and privacy.",
+      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop",
+      features: ["Private garden", "Smart Home", "Modular Kitchen", "Garage"]
     },
     {
       id: 3,
@@ -53,10 +58,11 @@ const Listings = () => {
       price: "₹55 Lakhs",
       bedrooms: null,
       bathrooms: 1,
-      area: "900 sq ft",
+      area: "1,600 sq ft",
       type: "Commercial",
-      description: "Prime commercial space perfect for retail business",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop"
+      description: "Ideal showroom or retail unit in the busy Auto Nagar market area.",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop",
+      features: ["Main road facing", "High visibility", "Storage + office", "Customer parking"]
     },
     {
       id: 4,
@@ -68,7 +74,8 @@ const Listings = () => {
       area: "1,150 sq ft",
       type: "Apartment",
       description: "Secure gated community with club house and amenities",
-      image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
+      amenities: ["24/7 Security", "Club House", "Swimming Pool", "Gym"]
     },
     {
       id: 5,
@@ -80,7 +87,8 @@ const Listings = () => {
       area: "2,200 sq ft",
       type: "Villa",
       description: "Independent house with terrace and two-wheeler parking",
-      image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=400&h=300&fit=crop",
+      features: ["Terrace", "Two-wheeler parking", "Independent", "Well-ventilated"]
     },
     {
       id: 6,
@@ -92,43 +100,8 @@ const Listings = () => {
       area: "1,800 sq ft",
       type: "Plot",
       description: "DTCP approved plot ready for immediate construction",
-      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop"
-    },
-    {
-      id: 7,
-      title: "2BHK Modern Flat",
-      location: "Auto Nagar",
-      price: "₹58 Lakhs",
-      bedrooms: 2,
-      bathrooms: 2,
-      area: "1,050 sq ft",
-      type: "Apartment",
-      description: "Well-ventilated apartment with modern fixtures",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop"
-    },
-    {
-      id: 8,
-      title: "Office Space",
-      location: "Benz Circle",
-      price: "₹75 Lakhs",
-      bedrooms: null,
-      bathrooms: 2,
-      area: "1,200 sq ft",
-      type: "Commercial",
-      description: "Prime office space in business district",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop"
-    },
-    {
-      id: 9,
-      title: "Duplex Villa",
-      location: "Gannavaram",
-      price: "₹1.8 Crores",
-      bedrooms: 5,
-      bathrooms: 4,
-      area: "3,200 sq ft",
-      type: "Villa",
-      description: "Luxurious duplex with swimming pool and garden",
-      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop",
+      features: ["DTCP approved", "Clear title", "Ready for construction", "Prime location"]
     }
   ];
 
@@ -149,6 +122,11 @@ const Listings = () => {
     
     return matchesFilter && matchesSearch;
   });
+
+  const handleViewDetails = (property: any) => {
+    setSelectedProperty(property);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -257,7 +235,10 @@ const Listings = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full gap-2">
+                    <Button 
+                      className="w-full gap-2" 
+                      onClick={() => handleViewDetails(listing)}
+                    >
                       <Eye className="w-4 h-4" />
                       View Details
                     </Button>
@@ -275,6 +256,12 @@ const Listings = () => {
         </section>
       </main>
       <Footer />
+      
+      <PropertyDetailModal 
+        property={selectedProperty}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
