@@ -18,8 +18,14 @@ const Listings = () => {
   
   useEffect(() => {
     const typeParam = searchParams.get('type');
+    const searchParam = searchParams.get('search');
+    
     if (typeParam) {
       setActiveFilter(typeParam);
+    }
+    
+    if (searchParam) {
+      setSearchTerm(searchParam);
     }
   }, [searchParams]);
 
@@ -118,7 +124,12 @@ const Listings = () => {
     const matchesSearch = searchTerm === '' || 
       listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       listing.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      listing.description.toLowerCase().includes(searchTerm.toLowerCase());
+      listing.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      listing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      listing.price.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      listing.area.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (listing.bedrooms && listing.bedrooms.toString().includes(searchTerm)) ||
+      (listing.bathrooms && listing.bathrooms.toString().includes(searchTerm));
     
     return matchesFilter && matchesSearch;
   });

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { Menu, X, Search, Plus } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -18,6 +21,14 @@ const Header = () => {
   ];
 
   const isActive = (href: string) => location.pathname === href;
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/listings?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
@@ -46,8 +57,31 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Contact Info & CTA */}
+          {/* Search Bar & CTAs */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Global Search Bar */}
+            <form onSubmit={handleSearch} className="relative">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search properties..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 w-64 bg-secondary/50 border-border focus:border-primary focus:ring-primary"
+                />
+              </div>
+            </form>
+            
+            {/* Add Property Button */}
+            <Link to="/add-property">
+              <Button variant="outline" className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Plus className="w-4 h-4" />
+                Add Property
+              </Button>
+            </Link>
+            
+            {/* Contact Button */}
             <Link to="/contact">
               <Button>Contact Us</Button>
             </Link>
@@ -79,7 +113,28 @@ const Header = () => {
                 </Link>
               ))}
             </div>
-            <div className="px-4 py-3">
+            <div className="px-4 py-3 space-y-3">
+              {/* Mobile Search */}
+              <form onSubmit={handleSearch} className="relative">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    type="text"
+                    placeholder="Search properties..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 w-full bg-secondary/50 border-border focus:border-primary focus:ring-primary"
+                  />
+                </div>
+              </form>
+              
+              <Link to="/add-property" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="outline" className="w-full gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Plus className="w-4 h-4" />
+                  Add Property
+                </Button>
+              </Link>
+              
               <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full">Contact Us</Button>
               </Link>

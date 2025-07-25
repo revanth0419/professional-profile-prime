@@ -92,6 +92,54 @@ const FeaturedListings = () => {
         type: "Apartment",
         description: "Well-designed 2BHK apartment with modular kitchen and parking",
         image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop"
+      },
+      {
+        id: 15,
+        title: "Furnished Studio Apartment",
+        location: "Labbipet",
+        price: "₹42 Lakhs",
+        bedrooms: 1,
+        bathrooms: 1,
+        area: "650 sq ft",
+        type: "Apartment",
+        description: "Fully furnished studio apartment perfect for young professionals",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop"
+      },
+      {
+        id: 16,
+        title: "Duplex Apartment",
+        location: "One Town",
+        price: "₹1.2 Crores",
+        bedrooms: 3,
+        bathrooms: 3,
+        area: "1,800 sq ft",
+        type: "Apartment",
+        description: "Spacious duplex with private terrace and premium fittings",
+        image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=300&fit=crop"
+      },
+      {
+        id: 17,
+        title: "Budget 1BHK Flat",
+        location: "Kandrika",
+        price: "₹35 Lakhs",
+        bedrooms: 1,
+        bathrooms: 1,
+        area: "580 sq ft",
+        type: "Apartment",
+        description: "Affordable 1BHK apartment with basic amenities and parking",
+        image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop"
+      },
+      {
+        id: 18,
+        title: "High-Rise Apartment",
+        location: "Tadepalli",
+        price: "₹95 Lakhs",
+        bedrooms: 3,
+        bathrooms: 2,
+        area: "1,350 sq ft",
+        type: "Apartment",
+        description: "Premium high-rise apartment with city views and modern amenities",
+        image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=400&h=300&fit=crop"
       }
     ],
     villa: [
@@ -180,6 +228,42 @@ const FeaturedListings = () => {
         type: "Plot",
         description: "Premium plot in gated community with all infrastructure facilities",
         image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
+      },
+      {
+        id: 19,
+        title: "Agricultural Land",
+        location: "Kankipadu",
+        price: "₹25 Lakhs",
+        bedrooms: null,
+        bathrooms: null,
+        area: "3,000 sq ft",
+        type: "Plot",
+        description: "Fertile agricultural land suitable for farming with water facility",
+        image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop"
+      },
+      {
+        id: 20,
+        title: "Industrial Plot",
+        location: "Autonagar",
+        price: "₹85 Lakhs",
+        bedrooms: null,
+        bathrooms: null,
+        area: "4,000 sq ft",
+        type: "Plot",
+        description: "Industrial plot with all utilities and permissions for manufacturing",
+        image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop"
+      },
+      {
+        id: 21,
+        title: "Villa Plot",
+        location: "Benz Circle",
+        price: "₹55 Lakhs",
+        bedrooms: null,
+        bathrooms: null,
+        area: "2,000 sq ft",
+        type: "Plot",
+        description: "Prime villa plot in residential area with 40x50 dimensions",
+        image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=300&fit=crop"
       }
     ],
     commercial: [
@@ -218,6 +302,42 @@ const FeaturedListings = () => {
         type: "Commercial",
         description: "Ground floor retail space with high visibility and customer parking",
         image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop"
+      },
+      {
+        id: 22,
+        title: "Warehouse Space",
+        location: "Mylavaram",
+        price: "₹1.2 Crores",
+        bedrooms: null,
+        bathrooms: 1,
+        area: "5,000 sq ft",
+        type: "Commercial",
+        description: "Large warehouse with loading dock and storage facilities",
+        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop"
+      },
+      {
+        id: 23,
+        title: "Restaurant Space",
+        location: "Governorpet",
+        price: "₹75 Lakhs",
+        bedrooms: null,
+        bathrooms: 3,
+        area: "1,800 sq ft",
+        type: "Commercial",
+        description: "Ready-to-use restaurant space with kitchen setup and dining area",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop"
+      },
+      {
+        id: 24,
+        title: "Shopping Complex",
+        location: "Patamata",
+        price: "₹3.5 Crores",
+        bedrooms: null,
+        bathrooms: 5,
+        area: "8,000 sq ft",
+        type: "Commercial",
+        description: "Multi-floor shopping complex with escalator and ample parking",
+        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop"
       }
     ]
   };
