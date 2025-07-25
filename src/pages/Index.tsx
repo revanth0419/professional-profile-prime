@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import FeaturedListings from '@/components/FeaturedListings';
+import AddPropertyBanner from '@/components/AddPropertyBanner';
 import Testimonials from '@/components/Testimonials';
 import Blog from '@/components/Blog';
 import CallToAction from '@/components/CallToAction';
@@ -13,6 +14,7 @@ const Index = () => {
       <main>
         <Hero />
         <FeaturedListings />
+        <AddPropertyBanner />
         <Testimonials />
         <Blog />
         <CallToAction />

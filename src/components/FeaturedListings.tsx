@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Bed, Bath, Square, Eye, Building, Home, Store, Trees } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PropertyDetailModal from '@/components/PropertyDetailModal';
 
 const FeaturedListings = () => {
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // Property categories for homepage sections
   const categories = [
     {
@@ -342,6 +346,11 @@ const FeaturedListings = () => {
     ]
   };
 
+  const handleViewDetails = (property: any) => {
+    setSelectedProperty(property);
+    setIsModalOpen(true);
+  };
+
   const PropertyCard = ({ listing }: { listing: any }) => (
     <Card className="group card-hover overflow-hidden">
       <div className="relative">
@@ -400,7 +409,7 @@ const FeaturedListings = () => {
           </div>
         </div>
         
-        <Button className="w-full gap-2">
+        <Button className="w-full gap-2" onClick={() => handleViewDetails(listing)}>
           <Eye className="w-4 h-4" />
           View Details
         </Button>
@@ -444,6 +453,12 @@ const FeaturedListings = () => {
           </div>
         ))}
       </div>
+      
+      <PropertyDetailModal 
+        property={selectedProperty}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };
