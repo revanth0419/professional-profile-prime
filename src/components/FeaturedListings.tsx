@@ -144,6 +144,19 @@ const FeaturedListings = () => {
         type: "Apartment",
         description: "Premium high-rise apartment with city views and modern amenities",
         image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=400&h=300&fit=crop"
+      },
+      {
+        id: 25,
+        title: "3BHK Investor Flat For Sale In Ramky One Odyssey",
+        location: "Kokapet",
+        price: "₹2.2 Crores",
+        bedrooms: 3,
+        bathrooms: 2,
+        area: "1,915 sq ft",
+        type: "Apartment",
+        description: "North facing, almost corner unit above 14th floor with unobstructed view of temple area. Possession by Dec 2025.",
+        image: "/lovable-uploads/626f040f-f15f-460a-a641-8570f55b6081.png",
+        featured: true
       }
     ],
     villa: [
