@@ -5,7 +5,6 @@ import { ArrowRight, MapPin, Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import heroImage from '@/assets/hero-vijayawada.jpg';
-
 const Hero = () => {
   const navigate = useNavigate();
   const [searchFilters, setSearchFilters] = useState({
@@ -13,7 +12,6 @@ const Hero = () => {
     priceRange: '',
     bedrooms: ''
   });
-
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (searchFilters.propertyType) params.set('type', searchFilters.propertyType);
@@ -21,14 +19,11 @@ const Hero = () => {
     if (searchFilters.bedrooms) params.set('bedrooms', searchFilters.bedrooms);
     navigate(`/listings?${params.toString()}`);
   };
-
-  return (
-    <section id="home" className="relative min-h-screen flex items-center bg-gradient-hero">
+  return <section id="home" className="relative min-h-screen flex items-center bg-gradient-hero">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style={{
+      backgroundImage: `url(${heroImage})`
+    }} />
       
       {/* Overlay */}
       <div className="absolute inset-0 bg-background/60" />
@@ -41,10 +36,7 @@ const Hero = () => {
             <span className="text-primary font-medium">RiverStone Realty • Vijayawada, Andhra Pradesh</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Find Your Perfect Property in{' '}
-            <span className="gradient-text">Vijayawada</span>
-          </h1>
+          
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Apartments, Villas, Plots, and Commercial Spaces — All in One Place.
@@ -55,7 +47,10 @@ const Hero = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Property Type</label>
-                <Select value={searchFilters.propertyType} onValueChange={(value) => setSearchFilters({...searchFilters, propertyType: value})}>
+                <Select value={searchFilters.propertyType} onValueChange={value => setSearchFilters({
+                ...searchFilters,
+                propertyType: value
+              })}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select Type" />
                   </SelectTrigger>
@@ -70,7 +65,10 @@ const Hero = () => {
               
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Price Range</label>
-                <Select value={searchFilters.priceRange} onValueChange={(value) => setSearchFilters({...searchFilters, priceRange: value})}>
+                <Select value={searchFilters.priceRange} onValueChange={value => setSearchFilters({
+                ...searchFilters,
+                priceRange: value
+              })}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select Price" />
                   </SelectTrigger>
@@ -85,7 +83,10 @@ const Hero = () => {
               
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Bedrooms</label>
-                <Select value={searchFilters.bedrooms} onValueChange={(value) => setSearchFilters({...searchFilters, bedrooms: value})}>
+                <Select value={searchFilters.bedrooms} onValueChange={value => setSearchFilters({
+                ...searchFilters,
+                bedrooms: value
+              })}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select BHK" />
                   </SelectTrigger>
@@ -121,28 +122,31 @@ const Hero = () => {
           
           {/* Property Type Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { type: 'Buildings', icon: '🏢', filter: 'villa' },
-              { type: 'Apartments', icon: '🏘️', filter: 'apartment' },
-              { type: 'Commercial Spaces', icon: '📈', filter: 'commercial' },
-              { type: 'Plots', icon: '🏞️', filter: 'plot' }
-            ].map((item) => (
-              <Link 
-                key={item.type} 
-                to={`/listings?type=${item.filter}`}
-                className="group bg-secondary/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-300 hover:bg-secondary/80 card-hover text-center"
-              >
+            {[{
+            type: 'Buildings',
+            icon: '🏢',
+            filter: 'villa'
+          }, {
+            type: 'Apartments',
+            icon: '🏘️',
+            filter: 'apartment'
+          }, {
+            type: 'Commercial Spaces',
+            icon: '📈',
+            filter: 'commercial'
+          }, {
+            type: 'Plots',
+            icon: '🏞️',
+            filter: 'plot'
+          }].map(item => <Link key={item.type} to={`/listings?type=${item.filter}`} className="group bg-secondary/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-300 hover:bg-secondary/80 card-hover text-center">
                 <div className="text-4xl mb-3">{item.icon}</div>
                 <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                   {item.type}
                 </h3>
-              </Link>
-            ))}
+              </Link>)}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
