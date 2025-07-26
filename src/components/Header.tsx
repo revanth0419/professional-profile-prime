@@ -12,11 +12,8 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Apartments', href: '/listings?type=apartment' },
-    { name: 'Villas', href: '/listings?type=villa' },
-    { name: 'Plots', href: '/listings?type=plot' },
-    { name: 'Commercial', href: '/listings?type=commercial' },
-    { name: 'About', href: '/about' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Add Property', href: '/add-property', isSpecial: true },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -48,17 +45,20 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.href) ? 'text-primary' : 'text-muted-foreground'
+                className={`text-sm font-medium transition-colors ${
+                  item.isSpecial 
+                    ? 'bg-primary/10 text-primary px-4 py-2 rounded-lg border border-primary/20 hover:bg-primary hover:text-primary-foreground flex items-center gap-2' 
+                    : `hover:text-primary ${isActive(item.href) ? 'text-primary' : 'text-muted-foreground'}`
                 }`}
               >
+                {item.isSpecial && <Plus className="w-4 h-4" />}
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          {/* Search Bar & CTAs */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Search Bar */}
+          <div className="hidden md:flex items-center">
             {/* Global Search Bar */}
             <form onSubmit={handleSearch} className="relative">
               <div className="relative">
@@ -72,19 +72,6 @@ const Header = () => {
                 />
               </div>
             </form>
-            
-            {/* Add Property Button */}
-            <Link to="/add-property">
-              <Button variant="outline" className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                <Plus className="w-4 h-4" />
-                Add Property
-              </Button>
-            </Link>
-            
-            {/* Contact Button */}
-            <Link to="/contact">
-              <Button>Contact Us</Button>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -105,15 +92,18 @@ const Header = () => {
                   key={item.name}
                   to={item.href}
                   className={`block px-3 py-2 text-base font-medium transition-colors ${
-                    isActive(item.href) ? 'text-primary' : 'text-muted-foreground hover:text-primary'
+                    item.isSpecial 
+                      ? 'bg-primary/10 text-primary rounded-lg border border-primary/20 flex items-center gap-2' 
+                      : isActive(item.href) ? 'text-primary' : 'text-muted-foreground hover:text-primary'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
+                  {item.isSpecial && <Plus className="w-4 h-4" />}
                   {item.name}
                 </Link>
               ))}
             </div>
-            <div className="px-4 py-3 space-y-3">
+            <div className="px-4 py-3">
               {/* Mobile Search */}
               <form onSubmit={handleSearch} className="relative">
                 <div className="relative">
@@ -127,17 +117,6 @@ const Header = () => {
                   />
                 </div>
               </form>
-              
-              <Link to="/add-property" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="outline" className="w-full gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                  <Plus className="w-4 h-4" />
-                  Add Property
-                </Button>
-              </Link>
-              
-              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full">Contact Us</Button>
-              </Link>
             </div>
           </div>
         )}
