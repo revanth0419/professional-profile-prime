@@ -122,14 +122,14 @@ const Hero = () => {
           {/* Property Type Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { type: 'Buildings', icon: '🏢', filter: 'villa' },
-              { type: 'Apartments', icon: '🏘️', filter: 'apartment' },
-              { type: 'Commercial Spaces', icon: '📈', filter: 'commercial' },
-              { type: 'Plots', icon: '🏞️', filter: 'plot' }
+              { type: 'Buildings', icon: '🏢', route: '/buildings' },
+              { type: 'Apartments', icon: '🏘️', route: '/listings?type=apartment' },
+              { type: 'Commercial Spaces', icon: '📈', route: '/listings?type=commercial' },
+              { type: 'Plots', icon: '🏞️', route: '/listings?type=plot' }
             ].map((item) => (
               <Link 
                 key={item.type} 
-                to={`/listings?type=${item.filter}`}
+                to={item.route}
                 className="group bg-secondary/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-300 hover:bg-secondary/80 card-hover text-center"
               >
                 <div className="text-4xl mb-3">{item.icon}</div>
